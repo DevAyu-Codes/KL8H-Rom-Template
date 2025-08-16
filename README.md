@@ -6,5 +6,7 @@ Edit your system.img accordingly and put it in the root directory, edit Installe
 
 ## Details
 Kernel: 5.15.188-DevAyu
+
 Based on fw: KL8h-H353VXAe-U-IN-250708V724
+
 Magisk version: 29.0
