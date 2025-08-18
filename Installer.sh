@@ -65,7 +65,7 @@ sleep_dots
 
 echo
 echo -n ">> Flashing system image..."
-fastboot flash system system.img >/dev/null 2>&1
+fastboot flash system images/system.img >/dev/null 2>&1
 sleep_dots
 
 echo
@@ -86,9 +86,11 @@ while true; do
         1)
             echo
             echo -n ">> Installing Magisk..."
-            fastboot flash boot boot_5.15.188.img >/dev/null 2>&1
+            fastboot flash boot images/boot_5.15.188.img >/dev/null 2>&1
             fastboot reboot bootloader >/dev/null 2>&1
-            sudo fastboot flash init_boot_a init_boot_a_magisk.img >/dev/null 2>&1
+            sudo fastboot flash init_boot_a images/init_boot_a_magisk.img >/dev/null 2>&1
+            fastboot --disable-verity --disable-verification flash vbmeta_a images/vbmeta_a.img >nul 2>&1
+            fastboot --disable-verity --disable-verification flash vbmeta_system_a images/vbmeta_system_a.img >nul 2>&1
             sleep_dots
             echo ">> Magisk installed successfully."
             break
@@ -96,9 +98,11 @@ while true; do
         2)
             echo
             echo -n ">> Installing Apatch..."
-            fastboot flash boot boot_5.15.188_apatch.img >/dev/null 2>&1
+            fastboot flash boot images/boot_5.15.188_apatch.img >/dev/null 2>&1
             fastboot reboot bootloader >/dev/null 2>&1
-            sudo fastboot flash init_boot_a init_boot_a.img >/dev/null 2>&1
+            sudo fastboot flash init_boot_a images/init_boot_a.img >/dev/null 2>&1
+            fastboot --disable-verity --disable-verification flash vbmeta_a images/vbmeta_a.img >nul 2>&1
+            fastboot --disable-verity --disable-verification flash vbmeta_system_a images/vbmeta_system_a.img >nul 2>&1
             sleep_dots
             echo ">> Apatch installed successfully."
             break
@@ -106,9 +110,11 @@ while true; do
         3)
             echo
             echo -n ">> Flashing stock boot (Unroot)..."
-            fastboot flash boot boot_5.15.188.img >/dev/null 2>&1
+            fastboot flash boot images/boot_5.15.188.img >/dev/null 2>&1
             fastboot reboot bootloader >/dev/null 2>&1
-            sudo fastboot flash init_boot_a init_boot_a.img >/dev/null 2>&1
+            sudo fastboot flash init_boot_a images/init_boot_a.img >/dev/null 2>&1
+            fastboot --disable-verity --disable-verification flash vbmeta_a images/vbmeta_a.img >nul 2>&1
+            fastboot --disable-verity --disable-verification flash vbmeta_system_a images/vbmeta_system_a.img >nul 2>&1
             sleep_dots
             echo ">> Stock boot flashed (Unrooted)."
             break

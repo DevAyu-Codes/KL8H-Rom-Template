@@ -56,7 +56,7 @@ call :dots
 
 echo.
 <nul set /p=^>^> Flashing system image...
-fastboot flash system system.img >nul 2>&1
+fastboot flash system images\system.img >nul 2>&1
 call :dots
 
 echo.
@@ -82,9 +82,11 @@ goto choose_root
 :magisk
 echo.
 <nul set /p=^>^> Installing Magisk...
-fastboot flash boot boot_5.15.188.img >nul 2>&1
+fastboot flash boot images\boot_5.15.188.img >nul 2>&1
 fastboot reboot bootloader >nul 2>&1
-fastboot flash init_boot_a init_boot_a_magisk.img >nul 2>&1
+fastboot flash init_boot_a images\init_boot_a_magisk.img >nul 2>&1
+fastboot --disable-verity --disable-verification flash vbmeta_a images\vbmeta_a.img >nul 2>&1
+fastboot --disable-verity --disable-verification flash vbmeta_system_a images\vbmeta_system_a.img >nul 2>&1
 call :dots
 echo ^>^> Magisk installed successfully.
 goto reboot
@@ -92,9 +94,11 @@ goto reboot
 :apatch
 echo.
 <nul set /p=^>^> Installing Apatch...
-fastboot flash boot boot_5.15.188_apatch.img >nul 2>&1
+fastboot flash boot images\boot_5.15.188_apatch.img >nul 2>&1
 fastboot reboot bootloader >nul 2>&1
-fastboot flash init_boot_a init_boot_a.img >nul 2>&1
+fastboot flash init_boot_a images\init_boot_a.img >nul 2>&1
+fastboot --disable-verity --disable-verification flash vbmeta_a images\vbmeta_a.img >nul 2>&1
+fastboot --disable-verity --disable-verification flash vbmeta_system_a images\vbmeta_system_a.img >nul 2>&1
 call :dots
 echo ^>^> Apatch installed successfully.
 goto reboot
@@ -102,9 +106,11 @@ goto reboot
 :unroot
 echo.
 <nul set /p=^>^> Flashing stock boot (Unroot)...
-    fastboot flash boot boot_5.15.188.img >nul 2>&1
+    fastboot flash boot images\boot_5.15.188.img >nul 2>&1
 fastboot reboot bootloader >nul 2>&1
-fastboot flash init_boot_a init_boot_a.img >nul 2>&1
+fastboot flash init_boot_a images\init_boot_a.img >nul 2>&1
+fastboot --disable-verity --disable-verification flash vbmeta_a images\vbmeta_a.img >nul 2>&1
+fastboot --disable-verity --disable-verification flash vbmeta_system_a images\vbmeta_system_a.img >nul 2>&1
 call :dots
 echo ^>^> Stock boot flashed (Unrooted).
 goto reboot
