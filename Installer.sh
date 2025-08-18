@@ -133,7 +133,5 @@ echo -n ">> Rebooting device now..."
 fastboot reboot >/dev/null 2>&1
 sleep_dots
 echo
-echo ">> Don't forget to install patch module after boot (if using Magisk/Apatch)."
-echo
 read -rp "Press Enter to exit..."
 

@@ -121,8 +121,6 @@ echo.
 fastboot reboot >nul 2>&1
 call :dots
 echo.
-echo ^>^> Don't forget to install patch module after boot (if using Magisk/Apatch).
-echo.
 pause
 exit /b
 
