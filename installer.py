@@ -132,17 +132,19 @@ def main():
         print("\nSelect a boot method:")
         print("[1] Magisk")
         print("[2] Apatch")
-        print("[3] Unroot (Stock Boot)")
-        choice = input("Enter choice (1/2/3): ")
-        if choice in ["1", "2", "3"]:
+        print("[3] KSU Next (KernelSU Next)")
+        print("[4] Unroot (Stock Boot)")
+        choice = input("Enter choice (1/2/3/4): ")
+        if choice in ["1", "2", "3", "4"]:
             break
-        print("Invalid choice. Please enter 1, 2, or 3.")
+        print("Invalid choice. Please enter 1, 2, 3, or 4.")
 
     # --- Define Image Paths ---
     boot_magisk = os.path.join(IMAGES_FOLDER, f"boot_{BOOT_VERSION}.img")
     boot_apatch = os.path.join(IMAGES_FOLDER, f"boot_{BOOT_VERSION}_apatch.img")
     boot_stock = os.path.join(IMAGES_FOLDER, f"boot_{BOOT_VERSION}.img")
     init_boot_magisk = os.path.join(IMAGES_FOLDER, "init_boot_a_magisk.img")
+    init_boot_ksu = os.path.join(IMAGES_FOLDER, "init_boot_a_ksu.img")
     init_boot_stock = os.path.join(IMAGES_FOLDER, "init_boot_a.img")
     vbmeta_a_img = os.path.join(IMAGES_FOLDER, "vbmeta_a.img")
     vbmeta_system_a_img = os.path.join(IMAGES_FOLDER, "vbmeta_system_a.img")
@@ -158,7 +160,11 @@ def main():
         animated_dots("Installing Apatch")
         boot_to_flash = boot_apatch
         init_boot_to_flash = init_boot_stock
-    elif choice == "3": # Unroot
+    elif choice == "3": # KSU
+        animated_dots("Installing KSU Next")
+        boot_to_flash = boot_stock
+        init_boot_to_flash = init_boot_ksu
+    elif choice == "4": # Unroot
         animated_dots("Flashing stock boot (Unroot)")
         boot_to_flash = boot_stock
         init_boot_to_flash = init_boot_stock
@@ -175,7 +181,8 @@ def main():
     
     if choice == "1": print(">> Magisk installed successfully.")
     elif choice == "2": print(">> Apatch installed successfully.")
-    elif choice == "3": print(">> Stock boot flashed (Unrooted).")
+    elif choice == "3": print(">> KSU Next installed successfully.")
+    elif choice == "4": print(">> Stock boot flashed (Unrooted).")
 
     # --- Final Reboot ---
     print()
